@@ -100,7 +100,6 @@ bool pushLogic() {
       rtcInit(config.timerCountDown, true);//reset timer
       return true;
     }
-
   }
 
   //**************************************
@@ -123,7 +122,6 @@ bool pushLogic() {
   }
   //**************************************
   if (timerWake && strcmp(config.timerSelect, "Either") == 0) {
-
     if (contactStatusClosed) {
       Serial.println(F("TIMER + CONTACT CLOSE"));
       sprintf(pushMessage, "%s, %sV", config.StillClosedMessage, batCharString);
@@ -134,7 +132,12 @@ bool pushLogic() {
       sprintf(pushMessage, "%s, %sV", config.StillOpenMessage, batCharString);
       return true;
     }
-
   }
+  //**************************************
+  if (timerWake) {
+    bmeMeasure();
+    return true;
+  }
+  
   return false;
 }

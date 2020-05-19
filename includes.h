@@ -21,7 +21,8 @@
 #include <ESPmDNS.h>
 #include <ArduinoOTA.h>
 
-
+#include <Adafruit_Sensor.h>
+#include <Adafruit_BME280.h>
 
 //trigBoard PINS
 const int BatteryPin = 36;//analog Input
@@ -117,6 +118,14 @@ bool contactChanged = false;
 bool wiFiNeeded = false;
 Config config;
 
+// BME280
+Adafruit_BME280 bme;
+bool newBmeData = false;
+float temperature;
+float humidity;
+float pressure;
+char topic[64];
+
 //function prototypes
 //    wakeup tab
 void checkWakeupPins();
@@ -152,6 +161,7 @@ void mqtt();
 //  OTA tab
 void setupOTA();
 void checkOTA();
-
+// bme280
+void initBme();
 
 #endif

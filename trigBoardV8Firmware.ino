@@ -10,17 +10,18 @@ void setup() {
   checkWakeupPins();
   loadConfiguration(filename, config);
   rtcInit(config.timerCountDown, false);
+  initBme();
   Serial.println(getBattery(), 2);
   if (pushLogic()) { //decide if push will occur or nt and what message will be
     if (wiFiNeeded) {
       if (connectWiFi()) {
-        pushOver();
-        pushSafer();
-        ifttt();
+        //pushOver();
+        //pushSafer();
+        //ifttt();
         mqtt();
       }
     }
-    udp();
+    //udp();
   }
 
   killPower();

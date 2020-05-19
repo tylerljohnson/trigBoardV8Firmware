@@ -39,9 +39,30 @@ void mqtt() {
         Serial.println("connected");
         // Once connected, publish an announcement...
         char mqttMessage[100];
-        sprintf(mqttMessage, "%s %s", config.trigName, pushMessage);
-        Serial.println(client.publish(config.mqttTopic, mqttMessage));
-        delay(20);
+
+        if (newBmeData) {
+          sprintf(mqttMessage, "%.2f", temperature);
+          sprintf(topic, "%s/%s/temperature", config.mqttTopic, config.trigName);
+          Serial.println(client.publish(topic, mqttMessage));
+          delay(20);
+
+          sprintf(mqttMessage, "%.2f", pressure);
+          sprintf(topic, "%s/%s/pressure", config.mqttTopic, config.trigName);
+          Serial.println(client.publish(topic, mqttMessage));
+          delay(20);
+
+          sprintf(mqttMessage, "%.2f", humidity);
+          sprintf(topic, "%s/%s/humidity", config.mqttTopic, config.trigName);
+          Serial.println(client.publish(topic, mqttMessage));
+          delay(20);
+        }
+        else {
+          // a non-bme message
+          sprintf(mqttMessage, "%s %s", config.trigName, pushMessage);
+          Serial.println(client.publish(config.mqttTopic, mqttMessage));
+          delay(20);
+        }
+        
         // ... and resubscribe
         //client.subscribe("inTopic");
         return;
