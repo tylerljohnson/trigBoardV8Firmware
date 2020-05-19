@@ -1,5 +1,8 @@
-# trigBoardV8_BaseFirmware
+# trigboard wiki
 https://www.kevindarrah.com/wiki/index.php?title=TrigBoard
 
-Release:
-3/19/20 - First Release
+This is my fork of Kevin Darrah's firmware repo.
+
+I'm using it as a playground. 
+
+You probably won't find any useful changes here :shrug:
